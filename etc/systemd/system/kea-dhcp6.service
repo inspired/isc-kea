@@ -1,0 +1,15 @@
+# This ensures that the dependency on PostgreSQL for lease and host reservations is met
+[Unit]
+Description=Kea DHCPv6 Server
+Documentation=man:kea-dhcp6(8)
+Wants=network-online.target postgresql.service
+After=network-online.target postgresql.service
+After=time-sync.target
+
+[Service]
+ExecStart=/opt/kea/sbin/kea-dhcp6 -c /opt/kea/etc/kea/kea.conf
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
