@@ -1,0 +1,14 @@
+[Unit]
+Description=Kea Control Agent
+Documentation=man:kea-ctrl-agent(8)
+Wants=network-online.target
+After=network-online.target
+After=time-sync.target
+
+[Service]
+ExecStart=/opt/kea/sbin/kea-ctrl-agent -c /opt/kea/etc/kea/kea-ctrl-agent.conf
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
