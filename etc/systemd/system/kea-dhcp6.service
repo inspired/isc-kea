@@ -8,7 +8,7 @@ After=time-sync.target
 
 [Service]
 ExecStart=/opt/kea/sbin/kea-dhcp6 -c /opt/kea/etc/kea/kea.conf
-ExecReload=/bin/kill -HUP $MAINPID
+ExecReload=/usr/bin/bash -c "/opt/kea/sbin/kea-dhcp6 -t /opt/kea/etc/kea/kea-dhcp6.conf && /bin/kill -HUP $MAINPID"
 Restart=always
 
 [Install]
